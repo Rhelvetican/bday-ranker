@@ -1,6 +1,6 @@
 use bday_ranker::{Date, fill_date_vec};
 use rand::{thread_rng, seq::SliceRandom};
-use std::{fs::File ,io::Write, fmt::format};
+use std::{fs::File ,io::Write};
 
 fn print_welcome() {
     print!("Input the year for ranking: ");
