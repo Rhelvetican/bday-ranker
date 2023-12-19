@@ -36,6 +36,7 @@ fn main() -> std::io::Result<()> {
             i + 1,
             date_vec[i].get_date_string()
         ));
+
     }
     for buf in contents {
         write!(file, "{}", buf).expect("Cannot write to file.");
