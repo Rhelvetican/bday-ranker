@@ -18,13 +18,15 @@ fn main() -> std::io::Result<()> {
     std::io::stdin().read_line(&mut read_buffer)
         .expect("Cannot read line.");
 
-    let input_year: u16 = read_buffer.trim().parse::<u16>().expect("Cannot convert to unsigned 16-bit integer.");
+    let input_year: u16 = read_buffer.trim().parse::<u16>()
+        .expect("Cannot convert to unsigned 16-bit integer.");
     let mut date_vec: Vec<Date> = Vec::new();
     fill_date_vec(&mut date_vec, input_year);
     date_vec.shuffle(&mut thread_rng());
 
     let mut contents: Vec<String> = Vec::new();
-    let mut file = File::create(format!("out/{}.txt", input_year)).expect("Unable to create/write to file.");
+    let mut file = File::create(format!("out/{}.txt", input_year))
+        .expect("Unable to create/write to file.");
     for i in 0..date_vec.len() {
         contents.push(format!("Rank {}: {}.\n", i + 1, date_vec[i].get_date_string()));
     }
