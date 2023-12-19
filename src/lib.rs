@@ -13,7 +13,7 @@ pub enum Month {
     SEP,
     OCT,
     NOV,
-    DEC
+    DEC,
 }
 
 impl Month {
@@ -39,12 +39,17 @@ impl Month {
 pub struct Date {
     pub day: u8,
     pub month: Month,
-    pub year: u16
+    pub year: u16,
 }
 
 impl Date {
     pub fn get_date_string(self) -> String {
-        format!("{} / {} / {}", self.day, Month::as_num(self.month), self.year)
+        format!(
+            "{} / {} / {}",
+            self.day,
+            Month::as_num(self.month),
+            self.year
+        )
     }
 
     pub fn is_leap_year(self) -> bool {
@@ -76,8 +81,14 @@ pub fn get_max_day(m: &Month, y: u16) -> u8 {
             } else {
                 28
             }
-        },
-        Month::JAN | Month::MAR | Month::MAY | Month::JUL | Month::AUG | Month::OCT | Month::DEC => 31,
+        }
+        Month::JAN
+        | Month::MAR
+        | Month::MAY
+        | Month::JUL
+        | Month::AUG
+        | Month::OCT
+        | Month::DEC => 31,
         _ => 30,
     }
 }
@@ -85,11 +96,11 @@ pub fn get_max_day(m: &Month, y: u16) -> u8 {
 pub fn fill_date_vec(vec: &mut Vec<Date>, y: u16) {
     for m in enum_iterator::all::<Month>().collect::<Vec<_>>() {
         for d in 1..=get_max_day(&m, y) {
-            vec.push( Date {
+            vec.push(Date {
                 day: d,
                 month: m,
                 year: y,
-            } )
+            })
         }
     }
 }
