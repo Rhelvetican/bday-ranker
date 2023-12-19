@@ -1,6 +1,6 @@
 use bday_ranker::{fill_date_vec, Date};
 use rand::{seq::SliceRandom, thread_rng};
-use std::{fs::File, io::Write};
+use std::{fs::{File, DirBuilder}, io::Write};
 
 fn print_welcome() {
     print!("Input the year for ranking: ");
@@ -28,8 +28,14 @@ fn main() -> std::io::Result<()> {
     date_vec.shuffle(&mut thread_rng());
 
     let mut contents: Vec<String> = Vec::new();
+    let path = "out/".to_string();
+    DirBuilder::new()
+        .recursive(true)
+        .create(path)
+        .expect("Cannot create directory.");
     let mut file =
-        File::create(format!("out/{}.txt", input_year)).expect("Unable to create/write to file.");
+        File::create(format!("out/{}.txt", input_year))
+            .expect("Unable to create/write to file.");
     for i in 0..date_vec.len() {
         contents.push(format!(
             "Rank {}: {}.\n",
